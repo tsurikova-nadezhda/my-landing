@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сколько часов в неделю вы теряете на то, что умеет ИИ?</title>
+<meta name="description" content="Диагностика за 2 минуты: сколько времени можно вернуть себе с помощью искусственного интеллекта.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Manrope:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink:         #0E0E0F;
+  --cream:       #F2EFE8;
+  --sand:        #DDD4C1;
+  --wood:        #8B6F4E;
+  --cream-soft:  rgba(242, 239, 232, 0.7);
+  --cream-faint: rgba(242, 239, 232, 0.5);
+
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-body:    'Manrope', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', 'Courier New', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01";
+  min-height: 100vh;
+  padding: 48px 24px;
+}
+
+@media (max-width: 640px) { body { padding: 32px 16px; } }
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 0 80px;
+}
+
+/* Monogram top */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(242, 239, 232, 0.12);
+}
+.monogram {
+  font-family: var(--f-display);
+  font-size: 1.3rem;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  font-variation-settings: "opsz" 144;
+}
+.monogram-mark {
+  display: inline-block; padding: 0 3px;
+  border-left: 1px solid var(--cream); margin: 0 2px;
+}
+.top-meta {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--cream-faint);
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  display: inline-block;
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 32px;
+}
+.eyebrow::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 20px; height: 1px; background: var(--cream-faint);
+}
+
+h1 {
+  font-family: var(--f-display);
+  font-weight: 340;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  font-variation-settings: "opsz" 144;
+  margin-bottom: 32px;
+}
+h1 em {
+  font-style: italic;
+  color: var(--sand);
+}
+
+.intro {
+  font-size: 1.05rem;
+  color: var(--cream-soft);
+  max-width: 56ch;
+  margin-bottom: 64px;
+}
+
+.test-form { display: grid; gap: 12px; margin-bottom: 48px; }
+.test-item {
+  padding: 24px 28px;
+  background: rgba(242, 239, 232, 0.04);
+  border: 1px solid rgba(242, 239, 232, 0.12);
+  transition: border-color 0.3s ease;
+}
+.test-item:hover { border-color: rgba(242, 239, 232, 0.25); }
+.test-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.test-question {
+  font-family: var(--f-display);
+  font-size: 1.1rem;
+  color: var(--cream);
+  line-height: 1.35;
+  flex: 1 1 auto;
+  min-width: 200px;
+}
+.test-value {
+  font-family: var(--f-mono);
+  font-size: 0.95rem;
+  color: var(--sand);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.test-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 2px;
+  background: rgba(242, 239, 232, 0.18);
+  outline: none; cursor: pointer;
+}
+.test-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px;
+  background: var(--cream);
+  border: none; cursor: pointer;
+}
+.test-slider::-webkit-slider-thumb:hover { background: var(--sand); }
+.test-slider::-moz-range-thumb {
+  width: 20px; height: 20px;
+  background: var(--cream);
+  border: none; cursor: pointer;
+}
+
+.test-result {
+  padding: 48px 40px;
+  background: rgba(242, 239, 232, 0.04);
+  border: 1px solid rgba(242, 239, 232, 0.2);
+  text-align: center;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.test-result-total {
+  font-family: var(--f-display);
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  font-weight: 340;
+  color: var(--sand);
+  font-style: italic;
+  line-height: 1;
+  font-variation-settings: "opsz" 144;
+}
+.test-result-label {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+.test-result-message {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.4;
+  color: var(--cream);
+  max-width: 40ch;
+}
+
+.cta {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 20px 34px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  letter-spacing: 0.01em;
+  margin-top: 8px;
+}
+.cta:hover { background: var(--sand); transform: translateY(-1px); }
+.cta-icon {
+  width: 18px; height: 18px;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.5;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cta:hover .cta-icon { transform: translateX(3px); }
+
+.foot {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(242, 239, 232, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.foot-left {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--cream-faint);
+  text-transform: uppercase;
+}
+.foot a {
+  color: var(--cream-soft);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 239, 232, 0.3);
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1rem;
+}
+.foot a:hover { color: var(--sand); border-color: var(--sand); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+    <a href="./landing.html" class="monogram">Н<span class="monogram-mark"></span>Ц</a>
+    <div class="top-meta">Диагностика · 2 минуты</div>
+  </div>
+
+  <span class="eyebrow">Мастер-класс 26 апреля</span>
+
+  <h1>Сколько часов<br>в неделю вы <em>теряете</em><br>на то, что умеет ИИ?</h1>
+
+  <p class="intro">
+    Передвиньте ползунок — покажет, сколько часов в неделю у вас уходит на каждый тип задач. Подсчёт идёт в вашем браузере: никакие данные не отправляются и не сохраняются.
+  </p>
+
+  <div class="test-form" id="test-form">
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">01 · Рабочая переписка, письма, отчёты, презентации</span><span class="test-value" data-value-for="q1">0 ч</span></div>
+      <input type="range" min="0" max="15" value="0" step="1" class="test-slider" data-question="q1">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">02 · Учёба, чтение статей, конспектирование, подготовка к экзаменам</span><span class="test-value" data-value-for="q2">0 ч</span></div>
+      <input type="range" min="0" max="15" value="0" step="1" class="test-slider" data-question="q2">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">03 · Поиск информации: документы, инструкции, нормативы</span><span class="test-value" data-value-for="q3">0 ч</span></div>
+      <input type="range" min="0" max="10" value="0" step="1" class="test-slider" data-question="q3">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">04 · Планирование: задачи, отпуск, мероприятия, бюджет</span><span class="test-value" data-value-for="q4">0 ч</span></div>
+      <input type="range" min="0" max="10" value="0" step="1" class="test-slider" data-question="q4">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">05 · Помощь детям с учёбой и домашними заданиями</span><span class="test-value" data-value-for="q5">0 ч</span></div>
+      <input type="range" min="0" max="10" value="0" step="1" class="test-slider" data-question="q5">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">06 · Переводы, разбор документов и текстов на иностранных языках</span><span class="test-value" data-value-for="q6">0 ч</span></div>
+      <input type="range" min="0" max="10" value="0" step="1" class="test-slider" data-question="q6">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">07 · Бытовые письма: УК, магазины, отзывы, претензии</span><span class="test-value" data-value-for="q7">0 ч</span></div>
+      <input type="range" min="0" max="8" value="0" step="1" class="test-slider" data-question="q7">
+    </div>
+    <div class="test-item">
+      <div class="test-item-head"><span class="test-question">08 · Подготовка к сложным разговорам, переговорам, выступлениям</span><span class="test-value" data-value-for="q8">0 ч</span></div>
+      <input type="range" min="0" max="10" value="0" step="1" class="test-slider" data-question="q8">
+    </div>
+  </div>
+
+  <div class="test-result" id="test-result">
+    <span class="test-result-label">Передвиньте ползунки выше</span>
+    <p class="test-result-message">Результат появится автоматически.</p>
+  </div>
+
+  <div class="foot">
+    <div class="foot-left">© 2026 · Надежда Цурикова</div>
+    <a href="./landing.html">Подробно о мастер-классе →</a>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const sliders = document.querySelectorAll('.test-slider');
+  const resultBox = document.getElementById('test-result');
+  const SAVINGS_RATE = 0.65;
+  const MK_WEEK_CEILING = 20;
+
+  function formatHours(h) {
+    const rounded = Math.round(h);
+    const mod10 = rounded % 10;
+    const mod100 = rounded % 100;
+    let word = 'часов';
+    if (mod10 === 1 && mod100 !== 11) word = 'час';
+    else if (mod10 >= 2 && mod10 <= 4 && !(mod100 >= 12 && mod100 <= 14)) word = 'часа';
+    return rounded + ' ' + word;
+  }
+
+  function render() {
+    let total = 0;
+    sliders.forEach(s => {
+      const v = parseInt(s.value, 10);
+      total += v;
+      const valEl = document.querySelector(`[data-value-for="${s.dataset.question}"]`);
+      if (valEl) valEl.textContent = v + ' ч';
+    });
+
+    const savings = Math.min(Math.round(total * SAVINGS_RATE), MK_WEEK_CEILING);
+    const perMonth = savings * 4;
+
+    let label, message;
+    if (total === 0) {
+      resultBox.innerHTML = `
+        <span class="test-result-label">Передвиньте ползунки выше</span>
+        <p class="test-result-message">Результат появится автоматически.</p>
+      `;
+      return;
+    } else if (total <= 5) {
+      label = 'Начало';
+      message = `Похоже, у вас уже всё под контролем — или вы пока не видите, где теряете время. На мастер-классе покажу скрытые зоны, где ИИ работает за вас.`;
+    } else if (total <= 15) {
+      label = 'Реалистично можно вернуть';
+      message = `${formatHours(savings)} в неделю. За месяц — ${formatHours(perMonth)} вашей жизни. Это полноценный рабочий день, который возвращается вам.`;
+    } else if (total <= 30) {
+      label = 'Реалистично можно вернуть';
+      message = `${formatHours(savings)} в неделю. За месяц — ${formatHours(perMonth)}. Целая дополнительная рабочая неделя каждый месяц.`;
+    } else {
+      label = 'Реалистично можно вернуть';
+      message = `${formatHours(savings)} в неделю. Больше половины рабочей недели. Это не ваша вина — просто никто не показывал, как.`;
+    }
+
+    resultBox.innerHTML = `
+      <span class="test-result-label">${label}</span>
+      <div class="test-result-total">${formatHours(savings)}</div>
+      <span class="test-result-label" style="margin-top: -8px;">в неделю</span>
+      <p class="test-result-message">${message}</p>
+      <a href="./landing.html#register" class="cta">
+        Записаться на 26 апреля
+        <svg class="cta-icon" viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+      </a>
+    `;
+  }
+
+  sliders.forEach(s => {
+    s.addEventListener('input', render);
+    s.addEventListener('change', render);
+  });
+  render();
+})();
+</script>
+</body>
+</html>
